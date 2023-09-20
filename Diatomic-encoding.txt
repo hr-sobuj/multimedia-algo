@@ -1,0 +1,121 @@
+/**
+                                        بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ
+**/
+#include <bits/stdc++.h>
+using namespace std;
+#define faster            ios_base::sync_with_stdio(0), cin.tie(0), cout.tie(0);
+#define ff                first
+#define ss                second
+#define pb                push_back
+#define pr                pair<int,int>
+#define im                -1e18
+#define mem(a,b)          memset(a,b,sizeof(a))
+#define gcd(a, b)         __gcd(a, b)
+#define lcm(a, b)         (a * (b / gcd(a, b)))
+#define all(a)            a.begin(), a.end()
+#define setbit(n)         __builtin_popcount(n);
+#define totalbit(n)       log2(n)+1
+#define oh                cout<<"Alpha valo sele"<<endl;
+#define ts(s)             to_string(s)
+#define for0(a,n)         for(int i=a;i<n;i++)
+#define for1(a,n)         for(int i=a;i<=n;i++)
+#define rfor0(n, a)       for(int i=n-1; i>=a; i--)
+#define rfor1(n, a)       for(int i=n; i>a; i--)
+
+#define nl                endl
+#define len(v)            v.size()
+#define lena(a)           sizeof(a)/sizeof(a[0])
+#define no                cout<<"NO"<<nl;
+#define yes               cout<<"YES"<<nl;
+#define posation(x)       cout<<fixed<<setprecision(x)
+#define pi                3.141592653589793
+#define INF               100000000000
+#define mod               1000000007 //10^9+7;
+#define N                 10000
+
+/**----data type----**/
+typedef long long int ll;
+typedef unsigned long long int llu;
+
+/**---Graph move---**/
+int dx[]= {-1, 0, 1,  0, -1, -1,  1, 1};
+int dy[]= { 0, 1, 0, -1, -1,  1, -1, 1};
+int kx[]= {-2,-1, 1, 2,  2,  1, -1, -2};
+int ky[]= { 1, 2, 2, 1, -1, -2, -2, -1};
+
+//map<int,int,greater<int>>m;
+struct comp
+{
+    template <typename T>
+
+    // Comparator function
+    bool operator()(const T& l, const T& r) const
+    {
+        if (l.second != r.second)
+        {
+            return l.second > r.second;
+        }
+        return l.first > r.first;
+    }
+};
+
+void sort(map<string, int>& M)
+{
+    set<pair<string, int>, comp> S(M.begin(), M.end());
+    for (auto& it : S)
+    {
+        //cout << it.first << ' ' << it.second << endl;
+    }
+}
+
+int main()
+{
+    cout<<"Enter The String"<<nl;
+    string line,s;
+    ifstream myfile ("test.txt");
+    cout<<"Actual Text: "<<nl;
+    if (myfile.is_open())
+    {
+        while ( getline (myfile,line) )
+        {
+            //cout << line << '\n';
+            s+=line;
+        }
+        myfile.close();
+    }
+    else cout << "Unable to open file";
+    map<string,int>mp;
+    for(int i=0; i<len(s)-1; i++)
+    {
+        string c="";
+        c=s[i];
+        c+=s[i+1];
+        //cout<<s[i]<<' '<<s[i+1]<<' '<<c<<nl;
+        mp[c]++;
+
+    }
+    sort(mp);
+    //for(auto it:mp)cout<<it.ff<<' '<<it.ss<<nl;
+    int mx=0;
+    for(auto it:mp)mx=max(mx,it.ss);
+    cout<<"Max : "<<mx<<nl;
+    cout<<s<<nl;
+    int j=33;
+    cout<<"Encoded Text :"<<nl;
+    for(int i=0;i<len(s)-1;i++){
+        string c="";
+        c=s[i];
+        c+=s[i+1];
+        if(mp[c]>=2){
+            cout<<char(j);
+            j++,i++;
+        }
+        else cout<<s[i];
+    }
+    cout<<nl;
+}
+/*
+aabbccccddddeeeefffaababababbbbbbbcccccc
+bdbdbdbdbbddddddbbbbbbbcbcbcbbcbccccccbb
+rrrrrccccchhhhhhhghghghghghhhhhgggggghhh
+*/
