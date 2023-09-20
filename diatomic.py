@@ -1,27 +1,27 @@
-import base64
+frequent_words = ['Th', 'is', 'a ', 'to', 'of', 'in', 'ed', 'oo', 'el', 'li']
+replace_chars = ['@', '$', '%', '^', '&', '*', '_', '+', ';', '|']
 
-# Function to encode data using base64
-def base64_encode(data):
-    encoded_bytes = base64.b64encode(data.encode())
-    encoded_data = encoded_bytes.decode()
-    return encoded_data
 
-# Function to decode data using base64
-def base64_decode(encoded_data):
-    decoded_bytes = base64.b64decode(encoded_data)
-    decoded_data = decoded_bytes.decode()
-    return decoded_data
+def diatomic_encoding(message):
+    encoded_text = ""
+    length = len(message) - 1
+    i = 0
 
-# Reading input from input.txt
-try:
-    with open("input.txt", "r") as file:
-        data = file.read()
-except FileNotFoundError:
-    print("input.txt not found. Please create the file and place your input data in it.")
-    exit(1)
+    while i < length:
+        if i + 1 <= length:
+            temp = message[i] + message[i + 1]
+            if temp in frequent_words:
+                encoded_text = encoded_text + (replace_chars[frequent_words.index(temp)])
+                i = i + 2
+                continue
+            else:
+                encoded_text = encoded_text + message[i]
+        else:
+            encoded_text = encoded_text + message[i]
+        i = i + 1
 
-# Encoding and writing to encoded_output.txt
-encoded = base64_encode(data)
-with open("encoded_output.txt", "w") as encoded_file:
-    encoded_file.write(encoded)
-print("Encoded data written to encoded_output.txt")
+    print(encoded_text)
+
+
+msg = "This is a demo text to encoded"
+diatomic_encoding(msg)
