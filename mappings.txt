@@ -1,0 +1,10 @@
+Th,@
+is,$
+a ,%
+to,^
+of,&
+in,*
+ed,_
+oo,+
+el,;
+li,|
